@@ -2,15 +2,18 @@ from flask import Flask
 
 app = Flask(__name__)
 
+
 # Route for '/'
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
     return 'Hello HBNB!'
 
+
 # Route for '/hbnb'
 @app.route('/hbnb', strict_slashes=False)
 def display_hbnb():
     return 'HBNB'
+
 
 # Route for '/c/<text>'
 @app.route('/c/<text>', strict_slashes=False)
@@ -18,6 +21,7 @@ def display_c_text(text):
     # Replace underscore (_) with space in the text variable
     formatted_text = text.replace('_', ' ')
     return f'C {formatted_text}'
+
 
 # Route for '/python/<text>'
 @app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
@@ -27,10 +31,12 @@ def display_python_text(text):
     formatted_text = text.replace('_', ' ')
     return f'Python {formatted_text}'
 
+
 # Route for '/number/<n>'
 @app.route('/number/<int:n>', strict_slashes=False)
 def display_number(n):
     return f'{n} is a number'
+
 
 # Run the Flask application
 if __name__ == '__main__':
