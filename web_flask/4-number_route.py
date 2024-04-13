@@ -1,43 +1,58 @@
+#!/usr/bin/python3
+'''
+    Flask app
+'''
 from flask import Flask
+
 
 app = Flask(__name__)
 
 
-# Route for '/'
+# Route to display "Hello HBNB!"
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
+    '''
+        Prints Hello HBNB!
+    '''
     return 'Hello HBNB!'
 
 
-# Route for '/hbnb'
 @app.route('/hbnb', strict_slashes=False)
-def display_hbnb():
+def hbnb():
+    '''
+        Prints HBNB
+    '''
     return 'HBNB'
 
 
-# Route for '/c/<text>'
 @app.route('/c/<text>', strict_slashes=False)
-def display_c_text(text):
-    # Replace underscore (_) with space in the text variable
-    formatted_text = text.replace('_', ' ')
-    return f'C {formatted_text}'
+def c_display(text="is cool"):
+    '''
+        Prints c <text>
+    '''
+    text = text.replace('_', ' ')
+    return f"C {text}"
 
 
-# Route for '/python/<text>'
-@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
+# Both routes apply to the same method
+@app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def display_python_text(text):
-    # Replace underscore (_) with space in the text variable
-    formatted_text = text.replace('_', ' ')
-    return f'Python {formatted_text}'
+def python_display(text="is cool"):
+    '''
+        Prints python <text>/ is cool
+    '''
+    text = text.replace('_', ' ')
+    return f"Python {text}"
 
 
-# Route for '/number/<n>'
 @app.route('/number/<int:n>', strict_slashes=False)
-def display_number(n):
-    return f'{n} is a number'
+def int_display(n):
+    '''
+        prints number <n>
+    '''
+    if isinstance(n, int):
+        return f'{n} is a number'
 
 
-# Run the Flask application
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

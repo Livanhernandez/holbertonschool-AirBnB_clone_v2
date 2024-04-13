@@ -1,52 +1,69 @@
-from flask import Flask, render_template
+#!/usr/bin/python3
+'''
+    Flask app
+'''
+from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 
 
-# Route for '/'
+# Route to display "Hello HBNB!"
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
+    '''
+        Prints Hello HBNB!
+    '''
     return 'Hello HBNB!'
 
 
-# Route for '/hbnb'
 @app.route('/hbnb', strict_slashes=False)
-def display_hbnb():
+def hbnb():
+    '''
+        Prints HBNB
+    '''
     return 'HBNB'
 
 
-# Route for '/c/<text>'
 @app.route('/c/<text>', strict_slashes=False)
-def display_c_text(text):
-    # Replace underscore (_) with space in the text variable
-    formatted_text = text.replace('_', ' ')
-    return f'C {formatted_text}'
+def c_display(text="is cool"):
+    '''
+        Prints c <text>
+    '''
+    text = text.replace('_', ' ')
+    return f"C {text}"
 
 
-# Route for '/python/<text>'
-@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
+# Both routes apply to the same method
+@app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def display_python_text(text):
-    # Replace underscore (_) with space in the text variable
-    formatted_text = text.replace('_', ' ')
-    return f'Python {formatted_text}'
+def python_display(text="is cool"):
+    '''
+        Prints python <text>/ is cool
+    '''
+    text = text.replace('_', ' ')
+    return f"Python {text}"
 
 
-# Route for '/number/<n>'
 @app.route('/number/<int:n>', strict_slashes=False)
-def display_number(n):
-    return f'{n} is a number'
-
-
-# Route for '/number_template/<n>'
-@app.route('/number_template/<int:n>', strict_slashes=False)
-def display_number_template(n):
-    if isinstance(n, int):
-        return render_template('5-number.html', n=n)
+def int_display(n):
+    '''
+        prints number <n>
+    '''
+    if n.isdigit():
+        return f'{n} is a number'
     else:
-        return 'Not Found', 404
+        return '404 not found'
 
 
-# Run the Flask application
+@app.route('/number_template/<int:n>')
+def display_number(n):
+    '''
+        Renders template and also number <n> is sent
+    '''
+    if isinstance(n, int):
+        return (render_template('5-number.html', number=n))
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

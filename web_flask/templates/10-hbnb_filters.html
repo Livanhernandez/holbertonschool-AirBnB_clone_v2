@@ -1,47 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>AirBnB clone</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/4-common.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/3-footer.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/3-header.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/6-filters.css') }}">
-</head>
-<body>
-    <header>
-        <div id="header_logo"></div>
-    </header>
-    <div class="container">
-        <section class="filters">
-            <button>Search</button>
-            <div class="locations">
-                <h3>States</h3>
-                <h4>&nbsp;</h4>
-                <ul class="popover">
-                    {% for state in states %}
-                        <li><h2>{{ state.name }}</h2>
-                            <ul>
-                                {% for city in state.cities|sort(attribute='name') %}
-                                    <li><h4>{{ city.name }}</h4></li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="amenities">
-                <h3>Amenities</h3>
-                <h4>&nbsp;</h4>
-                <ul class="popover">
-                    {% for amenity in amenities %}
-                        <li><h4>{{ amenity.name }}</h4></li>
-                    {% endfor %}
-                </ul>            
-            </div>
-        </section>
-    </div>
-    <footer>
-        <p>Holberton School</p>
-    </footer>
-</body>
-</html>
+<!DOCTYPE HTML>
+<HTML lang="en">
+  <HEAD>
+    <META charset="UTF-8" />
+    <META name="viewport" content="width=device-width, initial-scale=1.0" />
+    <LINK
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/3-common.css') }}"
+    />
+    <LINK
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/3-footer.css') }}"
+    />
+    <LINK
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/3-header.css') }}"
+    />
+    <LINK
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/6-filters.css') }}"
+    />
+    <LINK
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='images/icon.ico') }}"
+    />
+    <TITLE>Airbnb clone</TITLE>
+  </HEAD>
+  <BODY>
+    <HEADER>
+      <DIV class="logo"></DIV>
+    </HEADER>
+    <DIV class="container">
+      <SECTION class="filters">
+        <!-- Container 'locations' header section for states and cities title -->
+        <DIV class="locations">
+          <H3>States</H3>
+          <H4>&nbsp;</H4>
+          <!-- Popover is container for the scroll section to display states and cities -->
+          <UL class="popover">
+            {% for state in states %}
+            <LI>
+              <H2>{{ state.name }}</H2>
+                {% for city in state.cities|sort(attribute='name') %}
+                <LI class="list-text">{{ city.name }}</LI>
+                {% endfor %}
+            </LI>
+            {% endfor %}
+          </UL>
+          <!-- End popover container -->
+        </DIV>
+        <!-- End locations container div -->
+        <DIV class="amenities">
+          <H3>Amenities</H3>
+          <H4>&nbsp;</H4>
+          <UL class="popover">
+            {% for amenity in amenities|sort(attribute='name') %}
+            <LI class="list-text">{{ amenity.name }}</LI>
+            {% endfor %}
+          </UL>
+        </DIV>
+        <BUTTON class="search-button">Search</BUTTON>
+      </SECTION>
+    </DIV>
+    <FOOTER>Holberton School</FOOTER>
+  </BODY>
+</HTML>

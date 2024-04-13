@@ -1,17 +1,26 @@
+#!/usr/bin/python3
+'''
+    Flask app
+'''
 from flask import Flask
 
 app = Flask(__name__)
 
 
-# Route for '/'
+# Route to display "Hello HBNB!"
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
+    '''
+        Prints Hello HBNB
+    '''
     return 'Hello HBNB!'
 
 
-# Route for '/hbnb'
 @app.route('/hbnb', strict_slashes=False)
-def display_hbnb():
+def hbnb():
+    '''
+    prints HBNB
+    '''
     return 'HBNB'
 
 
