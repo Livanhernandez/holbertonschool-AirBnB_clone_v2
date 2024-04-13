@@ -2,8 +2,9 @@
 '''
     Flask app
 '''
-from flask import Flask
 
+
+from flask import Flask
 app = Flask(__name__)
 
 
@@ -11,7 +12,7 @@ app = Flask(__name__)
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
     '''
-        Prints Hello HBNB
+        Prints Hello HBNB!
     '''
     return 'Hello HBNB!'
 
@@ -19,9 +20,18 @@ def hello_hbnb():
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
     '''
-    prints HBNB
+        Prints HBNB
     '''
     return 'HBNB'
+
+
+@app.route('/c/<text>', strict_slashes=False)
+def c_display(text):
+    '''
+        Prints c <text>
+    '''
+    text = text.replace('_', ' ')
+    return f"C {text}"
 
 
 if __name__ == '__main__':
